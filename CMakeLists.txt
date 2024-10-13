@@ -81,4 +81,4 @@ message(STATUS "BUILD_TESTS: ${BUILD_TESTS}")
 # alut-test.exe
 
 add_executable(alut-test alut-test.cpp)
-target_link_libraries(alut-test PRIVATE alut "${MY_OPENAL_LIBRARY}")
+target_link_libraries(alut-test PRIVATE alut "${OPENAL_LIBRARY}")
