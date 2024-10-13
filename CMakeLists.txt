@@ -59,14 +59,17 @@ endif()
 ##############################################################################
 # alut
 
-# Make ALUT static
-set(BUILD_SHARED_LIBS OFF)
-add_definitions(-DALUT_STATIC)
-
 if(OpenAL_FOUND)
     add_subdirectory(freealut)
     set(ALUT_LIBRARY ${CMAKE_CURRENT_BINARY_DIR}/freealut/src/libalut.a)
 endif()
+
+##############################################################################
+# Display current status
+
+message(STATUS "OPENAL_INCLUDE_DIR: ${OPENAL_INCLUDE_DIR}")
+message(STATUS "OPENAL_LIBRARY: ${MY_OPENAL_LIBRARY}")
+message(STATUS "BUILD_SHARED_LIBS: ${BUILD_SHARED_LIBS}")
 
 ##############################################################################
 # alut-test.exe
