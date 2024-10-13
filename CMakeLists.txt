@@ -48,8 +48,6 @@ endif()
 
 find_package(OpenAL)
 
-set(MY_OPENAL_LIBRARY "")
-
 if(OpenAL_FOUND)
     # Tell the preprocessor OpenAL existence
     add_definitions(-DHAVE_OPENAL)
@@ -74,7 +72,7 @@ endif()
 # Display current status
 
 message(STATUS "OPENAL_INCLUDE_DIR: ${OPENAL_INCLUDE_DIR}")
-message(STATUS "OPENAL_LIBRARY: ${MY_OPENAL_LIBRARY}")
+message(STATUS "OPENAL_LIBRARY: ${OPENAL_LIBRARY}")
 message(STATUS "BUILD_SHARED_LIBS: ${BUILD_SHARED_LIBS}")
 message(STATUS "BUILD_EXAMPLES: ${BUILD_EXAMPLES}")
 message(STATUS "BUILD_TESTS: ${BUILD_TESTS}")
