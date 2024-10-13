@@ -5,10 +5,10 @@
 #include <AL/alut.h>
 
 int
-do_main(int argc, char **argv)
+do_body(int argc, char **argv)
 {
-    ALuint  m_beep_buffer;
-    ALuint  m_beep_source;
+    ALuint m_beep_buffer;
+    ALuint m_beep_source;
 
     //m_beep_buffer = alutCreateBufferFromFile("helloworld.wav");
     m_beep_buffer = alutCreateBufferWaveform(
@@ -43,7 +43,7 @@ main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    int ret = do_main(argc, argv);
+    int ret = do_body(argc, argv);
 
     alutExit();
     return ret;

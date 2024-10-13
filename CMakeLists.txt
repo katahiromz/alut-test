@@ -53,7 +53,6 @@ set(MY_OPENAL_LIBRARY "")
 if(OpenAL_FOUND)
     add_definitions(-DHAVE_OPENAL)
     include_directories("${OPENAL_INCLUDE_DIR}" "${OPENAL_INCLUDE_DIR}/..")
-    set(MY_OPENAL_LIBRARY "${OPENAL_LIBRARY}")
 endif()
 
 ##############################################################################
@@ -61,7 +60,6 @@ endif()
 
 if(OpenAL_FOUND)
     add_subdirectory(freealut)
-    set(ALUT_LIBRARY ${CMAKE_CURRENT_BINARY_DIR}/freealut/src/libalut.a)
 endif()
 
 ##############################################################################
