@@ -64,6 +64,9 @@ endif()
 set(BUILD_EXAMPLES OFF)
 set(BUILD_TESTS OFF)
 if(OpenAL_FOUND)
+    if(NOT BUILD_SHARED_LIBS)
+        add_definitions(-DALUT_STATIC)
+    endif()
     add_subdirectory(freealut)
 endif()
 
@@ -80,4 +83,4 @@ message(STATUS "BUILD_TESTS: ${BUILD_TESTS}")
 # alut-test.exe
 
 add_executable(alut-test alut-test.cpp)
-target_link_libraries(alut-test PRIVATE alut)
+target_link_libraries(alut-test PRIVATE alut "${MY_OPENAL_LIBRARY}")

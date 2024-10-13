@@ -4,8 +4,7 @@
 
 #include <AL/alut.h>
 
-int
-do_body(int argc, char **argv)
+int do_body(int argc, char **argv)
 {
     ALuint m_beep_buffer;
     ALuint m_beep_source;
@@ -32,8 +31,7 @@ do_body(int argc, char **argv)
     return EXIT_SUCCESS;
 }
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     /* Initialise ALUT and eat any ALUT-specific commandline flags. */
     if(!alutInit(&argc, argv))
