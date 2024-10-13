@@ -1,0 +1,3 @@
+[submodule "freealut"]
+	path = freealut
+	url = https://github.com/katahiromz/freealut
