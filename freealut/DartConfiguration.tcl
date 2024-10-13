@@ -14,20 +14,21 @@ CostDataFile:
 Site: SUPERHACKER
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Win32-VCExpress
+BuildName: Win32-make
 
 # Subprojects
 LabelsForSubprojects: 
 
 # Submission information
 SubmitURL: http://
+SubmitInactivityTimeout: 
 
 # Dashboard start time
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/dev/VeySickProject/alut-test/freealut"
-MakeCommand: "C:\Program Files\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
+ConfigureCommand: "C:/msys64/mingw32/bin/cmake.exe" "C:/dev/VeySickProject/alut-test/freealut"
+MakeCommand: C:/msys64/mingw32/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -62,8 +63,8 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: c:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/cl.exe
-CompilerVersion: 15.0.30729.1
+Compiler: C:/msys64/mingw32/bin/c++.exe
+CompilerVersion: 14.1.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
@@ -80,7 +81,7 @@ MemoryCheckCommandOptions:
 MemoryCheckSuppressionFile: 
 
 # Coverage
-CoverageCommand: COVERAGE_COMMAND-NOTFOUND
+CoverageCommand: C:/msys64/mingw32/bin/gcov.exe
 CoverageExtraFlags: -l
 
 # Testing options
@@ -94,7 +95,10 @@ TimeOut: 1500
 # so would cause the system load to exceed this value.
 TestLoad: 
 
-UseLaunchers: 0
+TLSVerify: 
+TLSVersion: 
+
+UseLaunchers: 
 CurlOptions: 
 # warning, if you add new options here that have to do with submit,
 # you have to update cmCTestSubmitCommand.cxx

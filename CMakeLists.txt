@@ -51,13 +51,18 @@ find_package(OpenAL)
 set(MY_OPENAL_LIBRARY "")
 
 if(OpenAL_FOUND)
+    # Tell the preprocessor OpenAL existence
     add_definitions(-DHAVE_OPENAL)
+
+    # workaround for including <AL/alut.h>
     include_directories("${OPENAL_INCLUDE_DIR}" "${OPENAL_INCLUDE_DIR}/..")
 endif()
 
 ##############################################################################
 # alut
 
+set(BUILD_EXAMPLES OFF)
+set(BUILD_TESTS OFF)
 if(OpenAL_FOUND)
     add_subdirectory(freealut)
 endif()
@@ -68,6 +73,8 @@ endif()
 message(STATUS "OPENAL_INCLUDE_DIR: ${OPENAL_INCLUDE_DIR}")
 message(STATUS "OPENAL_LIBRARY: ${MY_OPENAL_LIBRARY}")
 message(STATUS "BUILD_SHARED_LIBS: ${BUILD_SHARED_LIBS}")
+message(STATUS "BUILD_EXAMPLES: ${BUILD_EXAMPLES}")
+message(STATUS "BUILD_TESTS: ${BUILD_TESTS}")
 
 ##############################################################################
 # alut-test.exe
