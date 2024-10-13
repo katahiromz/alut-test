@@ -4,79 +4,47 @@
 
 #include <AL/alut.h>
 
-/*
- * This program loads and plays a variety of files.
- */
-
-static void
-playFile (const char *fileName)
+int
+do_main(int argc, char **argv)
 {
-  ALuint buffer;
-  ALuint source;
-  ALenum error;
-  ALint status;
+    ALuint  m_beep_buffer;
+    ALuint  m_beep_source;
 
-  /* Create an AL buffer from the given sound file. */
-  buffer = alutCreateBufferFromFile (fileName);
-  if (buffer == AL_NONE)
-    {
-      error = alutGetError ();
-      fprintf (stderr, "Error loading file: '%s'\n",
-               alutGetErrorString (error));
-      alutExit ();
-      exit (EXIT_FAILURE);
-    }
+    //m_beep_buffer = alutCreateBufferFromFile("helloworld.wav");
+    m_beep_buffer = alutCreateBufferWaveform(
+        ALUT_WAVEFORM_SINE,
+        2400,
+        0,
+        0.5);
 
-  /* Generate a single source, attach the buffer to it and start playing. */
-  alGenSources (1, &source);
-  alSourcei (source, AL_BUFFER, buffer);
-  alSourcePlay (source);
+    alGenSources(1, &m_beep_source);
+    alSourcei(m_beep_source, AL_BUFFER, m_beep_buffer);
 
-  /* Normally nothing should go wrong above, but one never knows... */
-  error = alGetError ();
-  if (error != ALUT_ERROR_NO_ERROR)
-    {
-      fprintf (stderr, "%s\n", alGetString (error));
-      alutExit ();
-      exit (EXIT_FAILURE);
-    }
+    alSourceStop(m_beep_source);
+    alSourcei(m_beep_source, AL_LOOPING, AL_FALSE);
+    alSourcePlay(m_beep_source);
 
-  /* Check every 0.1 seconds if the sound is still playing. */
-  do
-    {
-      alutSleep (0.1f);
-      alGetSourcei (source, AL_SOURCE_STATE, &status);
-    }
-  while (status == AL_PLAYING);
+    alutSleep(1);
+
+    alDeleteBuffers(1, &m_beep_buffer);
+    alDeleteSources(1, &m_beep_source);
+
+    return EXIT_SUCCESS;
 }
 
 int
-main (int argc, char **argv)
+main(int argc, char **argv)
 {
-  /* Initialise ALUT and eat any ALUT-specific commandline flags. */
-  if (!alutInit (&argc, argv))
+    /* Initialise ALUT and eat any ALUT-specific commandline flags. */
+    if(!alutInit(&argc, argv))
     {
-      ALenum error = alutGetError ();
-      fprintf (stderr, "%s\n", alutGetErrorString (error));
-      exit (EXIT_FAILURE);
+        ALenum error = alutGetError();
+        fprintf(stderr, "%s\n", alutGetErrorString(error));
+        return EXIT_FAILURE;
     }
 
-  /* Check for correct usage. */
-  if (argc != 2)
-    {
-      fprintf (stderr, "usage: playfile <fileName>\n");
-      alutExit ();
-      exit (EXIT_FAILURE);
-    }
+    int ret = do_main(argc, argv);
 
-  /* If everything is OK, play the sound file and exit when finished. */
-  playFile (argv[1]);
-
-  if (!alutExit ())
-    {
-      ALenum error = alutGetError ();
-      fprintf (stderr, "%s\n", alutGetErrorString (error));
-      exit (EXIT_FAILURE);
-    }
-  return EXIT_SUCCESS;
+    alutExit();
+    return ret;
 }
